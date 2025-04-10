@@ -1,0 +1,256 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 172 66% 50%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 160 84% 39%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 172 66% 50%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 172 66% 50%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 160 84% 39%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 172 66% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Calendar Styles */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+}
+
+.calendar-day {
+  aspect-ratio: 1 / 1;
+  position: relative;
+  cursor: pointer;
+}
+
+.calendar-day:hover {
+  @apply bg-teal-50 dark:bg-teal-900/20;
+}
+
+.calendar-day.today {
+  @apply border-teal-500 border-2;
+}
+
+.calendar-day.outside-month {
+  @apply text-muted-foreground;
+}
+
+.appointment-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  @apply bg-teal-500;
+}
+
+/* Week View Styles */
+.week-view {
+  display: grid;
+  grid-template-columns: 60px repeat(7, 1fr);
+  grid-auto-rows: minmax(60px, auto);
+  gap: 1px;
+}
+
+.time-slot {
+  @apply border-r border-b border-border;
+  height: 60px;
+  position: relative;
+}
+
+.time-label {
+  @apply text-xs text-muted-foreground;
+  position: relative;
+  top: -10px;
+}
+
+/* Update the appointment card styles to ensure better visibility in light mode */
+.appointment-card {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  z-index: 10;
+  cursor: pointer;
+  /* Add border for better visibility in light mode */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  /* Add text shadow for better readability */
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+  /* Add box shadow for depth */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Improve calendar day appointment pills visibility */
+.calendar-day .text-xs.truncate {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Update appointment type colors with stronger contrast for light mode */
+.appointment-emergency {
+  @apply bg-red-600 text-white;
+}
+
+.appointment-examination {
+  @apply bg-yellow-500 text-black font-medium;
+}
+
+.appointment-consultation {
+  @apply bg-purple-600 text-white;
+}
+
+.appointment-routine {
+  @apply bg-teal-600 text-white;
+}
+
+.appointment-sick {
+  @apply bg-blue-600 text-white;
+}
+
+/* Update gradient colors for better visibility in light mode */
+.bg-gradient-to-r.from-red-500.to-rose-500 {
+  @apply from-red-600 to-rose-600;
+}
+
+.bg-gradient-to-r.from-yellow-400.to-amber-400 {
+  @apply from-yellow-500 to-amber-500;
+}
+
+.bg-gradient-to-r.from-purple-500.to-violet-500 {
+  @apply from-purple-600 to-violet-600;
+}
+
+.bg-gradient-to-r.from-blue-500.to-indigo-500 {
+  @apply from-blue-600 to-indigo-600;
+}
+
+.bg-gradient-to-r.from-teal-500.to-emerald-500 {
+  @apply from-teal-600 to-emerald-600;
+}
+
+/* Sidebar styles */
+.sidebar {
+  @apply w-64 h-full bg-card border-r border-border hidden md:block;
+}
+
+.sidebar-item {
+  @apply flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-md transition-colors;
+}
+
+.sidebar-item:hover {
+  @apply bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-400;
+}
+
+.sidebar-item.active {
+  @apply bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-400;
+}
+
+/* Search bar styles */
+.search-bar {
+  @apply relative flex-1 md:max-w-md;
+}
+
+.search-icon {
+  @apply absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground;
+}
+
+.search-input {
+  @apply w-full pl-10 pr-4 py-2 rounded-full border border-input bg-background;
+}
+
+/* View toggle styles */
+.view-toggle {
+  @apply flex items-center justify-between mb-4 rounded-lg p-1;
+}
+
+.view-toggle-button {
+  @apply px-4 py-1 text-sm font-medium rounded-md transition-colors;
+}
+
+.view-toggle-button.active {
+  @apply bg-card shadow-sm;
+}
+
+/* Custom scrollbar */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #e2e8f0;
+  border-radius: 3px;
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #1e293b;
+}
+
+/* Animations */
+@keyframes pulse-teal {
+  0%,
+  100% {
+    background-color: rgba(20, 184, 166, 0.1);
+  }
+  50% {
+    background-color: rgba(20, 184, 166, 0.2);
+  }
+}
+
+.animate-pulse-teal {
+  animation: pulse-teal 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
